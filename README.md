@@ -1,4 +1,4 @@
-# Documentação Blog - Sistema Imobiliário Bortone
+# Documentação Blog - Sistema Imobiliária Bortone
 
 ## Visão Geral
 Sistema de Blog integrado ao projeto imobiliário, permitindo a publicação e gerenciamento de artigos relacionados ao mercado imobiliário, dicas, notícias e atualizações.
