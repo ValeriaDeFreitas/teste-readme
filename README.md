@@ -1,30 +1,30 @@
 # Documentação Blog - Sistema Imobiliária Bortone
 
 ## Visão Geral
-Sistema de Blog integrado ao projeto imobiliário, permitindo a publicação e gerenciamento de artigos relacionados ao mercado imobiliário, dicas, notícias e atualizações.
+O Blog é o espaço do nosso sistema imobiliário para compartilhar artigos, dicas, notícias e novidades do mercado. Ele foi pensado para ser fácil de gerenciar pelo time administrativo e simples de navegar para quem busca informação de qualidade sobre imóveis.
 
 ---
 
 ## API Endpoints
 
 ### **GET /api/blog/posts**
-- **Descrição:** Lista todos os posts do blog com filtros opcionais.  
-- **Método:** `GET`  
-- **URL:** `/api/blog/posts`  
+- **O que faz:** Retorna uma lista de posts do blog, podendo filtrar por categoria, tag, busca, página e limite de itens.
+- **Método:** `GET`
+- **URL:** `/api/blog/posts`
 
-**Parâmetros opcionais:**
-- `categoria`: filtrar por categoria (ex: `"mercado"`, `"dicas"`, `"noticias"`)  
-- `tag`: filtrar por tag (ex: `"financiamento"`, `"aluguel"`, `"venda"`)  
-- `busca`: buscar por palavra-chave no título ou conteúdo  
-- `pagina`: número da página para paginação  
-- `limite`: número de itens por página (padrão: 10)  
+**Filtros opcionais:**
+- `categoria`: filtra por categoria (ex: "mercado", "dicas", "noticias")
+- `tag`: filtra por tag (ex: "financiamento", "aluguel", "venda")
+- `busca`: busca por palavra-chave no título ou conteúdo
+- `pagina`: número da página para paginação
+- `limite`: quantos itens por página (padrão: 10)
 
-**Exemplo de Requisição:**
+**Exemplo de uso:**
 ```bash
 GET /api/blog/posts?categoria=mercado&tag=financiamento&busca=taxa&pagina=1&limite=5
 ```
 
-**Exemplo de Resposta (200):**
+**Resposta de exemplo:**
 ```json
 {
   "total": 25,
@@ -46,25 +46,25 @@ GET /api/blog/posts?categoria=mercado&tag=financiamento&busca=taxa&pagina=1&limi
 }
 ```
 
-**Códigos de Status:** `200`, `400`, `500`  
-**Autenticação:** não requer  
+**Status:** `200`, `400`, `500`
+**Autenticação:** não precisa
 
 ---
 
 ### **GET /api/blog/posts/:id**
-- **Descrição:** Busca um post específico por ID.  
-- **Método:** `GET`  
-- **URL:** `/api/blog/posts/:id`  
+- **O que faz:** Busca um post específico pelo ID.
+- **Método:** `GET`
+- **URL:** `/api/blog/posts/:id`
 
 **Parâmetros:**
-- `id` (obrigatório): ID do post  
+- `id` (obrigatório): ID do post
 
-**Exemplo de Requisição:**
+**Exemplo de uso:**
 ```bash
 GET /api/blog/posts/1
 ```
 
-**Exemplo de Resposta (200):**
+**Resposta de exemplo:**
 ```json
 {
   "id": 1,
@@ -79,17 +79,17 @@ GET /api/blog/posts/1
 }
 ```
 
-**Códigos de Status:** `200`, `404`, `500`  
-**Autenticação:** não requer  
+**Status:** `200`, `404`, `500`
+**Autenticação:** não precisa
 
 ---
 
 ### **POST /api/blog/posts**
-- **Descrição:** Cria um novo post no blog.  
-- **Método:** `POST`  
-- **URL:** `/api/blog/posts`  
+- **O que faz:** Cria um novo post no blog.
+- **Método:** `POST`
+- **URL:** `/api/blog/posts`
 
-**Body (JSON):**
+**Body esperado (JSON):**
 ```json
 {
   "titulo": "string (obrigatório)",
@@ -101,7 +101,7 @@ GET /api/blog/posts/1
 }
 ```
 
-**Exemplo de Requisição:**
+**Exemplo de uso:**
 ```bash
 POST /api/blog/posts
 Content-Type: application/json
@@ -116,7 +116,7 @@ Content-Type: application/json
 }
 ```
 
-**Exemplo de Resposta (201):**
+**Resposta de exemplo:**
 ```json
 {
   "id": 15,
@@ -131,20 +131,20 @@ Content-Type: application/json
 }
 ```
 
-**Códigos de Status:** `201`, `400`, `500`  
-**Autenticação:** requer token de administrador  
+**Status:** `201`, `400`, `500`
+**Autenticação:** precisa ser admin (token)
 
 ---
 
 ### **PUT /api/blog/posts/:id**
-- **Descrição:** Atualiza um post existente.  
-- **Método:** `PUT`  
-- **URL:** `/api/blog/posts/:id`  
+- **O que faz:** Atualiza um post já existente.
+- **Método:** `PUT`
+- **URL:** `/api/blog/posts/:id`
 
 **Parâmetros:**
-- `id` (obrigatório): ID do post  
+- `id` (obrigatório): ID do post
 
-**Body (JSON):**
+**Body esperado (JSON):**
 ```json
 {
   "titulo": "string (opcional)",
@@ -157,7 +157,7 @@ Content-Type: application/json
 }
 ```
 
-**Exemplo de Requisição:**
+**Exemplo de uso:**
 ```bash
 PUT /api/blog/posts/1
 Content-Type: application/json
@@ -169,67 +169,50 @@ Content-Type: application/json
 }
 ```
 
-**Códigos de Status:** `200`, `400`, `404`, `500`  
-**Autenticação:** requer token de administrador  
+**Status:** `200`, `400`, `404`, `500`
+**Autenticação:** precisa ser admin (token)
 
 ---
 
 ### **DELETE /api/blog/posts/:id**
-- **Descrição:** Remove um post do blog.  
-- **Método:** `DELETE`  
-- **URL:** `/api/blog/posts/:id`  
+- **O que faz:** Remove um post do blog.
+- **Método:** `DELETE`
+- **URL:** `/api/blog/posts/:id`
 
 **Parâmetros:**
-- `id` (obrigatório): ID do post  
+- `id` (obrigatório): ID do post
 
-**Códigos de Status:** `204`, `404`, `500`  
-**Autenticação:** requer token de administrador  
+**Status:** `204`, `404`, `500`
+**Autenticação:** precisa ser admin (token)
 
 ---
 
-## Middleware de Validação
+## Validação dos Dados
 
 ### **Validação de Post**
-Localização: `back-end/src/middleware/blog-validation.js`  
+Arquivo: `back-end/src/middleware/blog-validation.js`
 
-**Regras para título:**
-- Campo obrigatório para criação/atualização  
-- Mínimo de 10 caracteres  
-- Máximo de 200 caracteres  
-- Não pode conter apenas espaços em branco  
+- **Título:** obrigatório, entre 10 e 200 caracteres, não pode ser só espaços
+- **Conteúdo:** obrigatório, entre 100 e 10.000 caracteres, não pode ser só espaços
+- **Resumo:** obrigatório, entre 50 e 500 caracteres, não pode ser só espaços
 
-**Regras para conteúdo:**
-- Campo obrigatório para criação/atualização  
-- Mínimo de 100 caracteres  
-- Máximo de 10000 caracteres  
-- Não pode conter apenas espaços em branco  
-
-**Regras para resumo:**
-- Campo obrigatório para criação/atualização  
-- Mínimo de 50 caracteres  
-- Máximo de 500 caracteres  
-- Não pode conter apenas espaços em branco  
-
-### **Validação de Categoria**
-Categorias permitidas:
-- `mercado`
-- `dicas`
-- `noticias`
-- `financiamento`
-- `documentacao`
-- `geral`
+### **Categorias Permitidas**
+- mercado
+- dicas
+- noticias
+- financiamento
+- documentacao
+- geral
 
 ---
 
 ## Tratamento de Erros
 
-### **Erro 400 - Bad Request**
-Retornado quando:
-- Dados de entrada inválidos  
-- Campos obrigatórios ausentes  
-- Formato de dados incorreto  
+- **400 - Bad Request:** dados inválidos, campos obrigatórios ausentes, formato incorreto
+- **404 - Not Found:** post não encontrado, rota inexistente
+- **500 - Internal Server Error:** erro inesperado, falha no banco, erro não tratado
 
-**Exemplo de Resposta:**
+**Exemplo de erro 400:**
 ```json
 {
   "erro": "Dados inválidos",
@@ -240,12 +223,7 @@ Retornado quando:
 }
 ```
 
-### **Erro 404 - Not Found**
-Retornado quando:
-- Post não encontrado pelo ID  
-- Rota não existente  
-
-**Exemplo de Resposta:**
+**Exemplo de erro 404:**
 ```json
 {
   "erro": "Post não encontrado",
@@ -253,13 +231,7 @@ Retornado quando:
 }
 ```
 
-### **Erro 500 - Internal Server Error**
-Retornado quando:
-- Erro interno do servidor  
-- Falha na conexão com banco de dados  
-- Erro não tratado  
-
-**Exemplo de Resposta:**
+**Exemplo de erro 500:**
 ```json
 {
   "erro": "Erro interno do servidor",
@@ -269,32 +241,20 @@ Retornado quando:
 
 ---
 
-## Guia de Uso - Frontend
+## Como Usar o Blog no Frontend
 
-### **Como Acessar o Blog**
-- **Navegação Principal:**
-  - Acesse o menu principal do site  
-  - Clique em **"Blog"**  
-  - Você será redirecionado para `/blog`  
+### **Acessando o Blog**
+- No menu principal do site, clique em **Blog** ou acesse diretamente `/blog`.
 
-- **Link Direto:**  
-  - Use a URL direta: `https://seusite.com/blog`  
+### **Lendo um Post**
+- Use os filtros de categoria ou tags, ou a busca para encontrar posts.
+- Clique no título para abrir o post completo.
+- Compartilhe o conteúdo se quiser!
 
-### **Como Ler um Post**
-- **Para Usuários Comuns:**
-  - Acesse a página do blog  
-  - Use os filtros por categoria ou tags  
-  - Use a barra de busca para encontrar posts específicos  
-  - Clique no título do post para abrir a página completa  
-  - Leia o conteúdo e compartilhe se desejar  
-
-- **Para Administradores:**
-  - Faça login como administrador  
-  - Acesse `/admin/blog`  
-  - Clique em **"Novo Post"**  
-  - Preencha os campos obrigatórios  
-  - Selecione a categoria e adicione tags  
-  - Salve o post  
+### **Para Administradores**
+- Faça login como admin e acesse `/admin/blog`.
+- Clique em **Novo Post** para criar um artigo.
+- Preencha os campos obrigatórios, selecione categoria e tags, e salve.
 
 ---
 
@@ -322,3 +282,7 @@ front-end/src/
 └── services/
     └── blog-service.js      # Serviços de API
 ```
+
+---
+
+Se tiver dúvidas ou quiser contribuir, fale com o time de desenvolvimento!
